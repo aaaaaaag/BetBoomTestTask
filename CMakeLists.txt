@@ -13,7 +13,7 @@ set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets)
 
 add_library(${PROJECT_NAME} inc/Qt/MainWidget.cpp inc/Qt/MainWidget.h inc/Logic/OpenCVWrapper.cpp inc/Logic/OpenCVWrapper.h inc/Logic/IOpenCVWrapper.h
         inc/Logic/IImageCursorController.h inc/Logic/ImageCursorController.cpp inc/Logic/ImageCursorController.h
-        inc/Qt/IConnectMediator.h inc/Qt/ConnectMediator.cpp inc/Qt/ConnectMediator.h inc/Logic/ILabelImageLoader.cpp inc/Logic/ILabelImageLoader.h inc/Qt/IImageLabel.h inc/Logic/IQPixMapToMatConverter.h inc/Logic/QPixMapToMatConverter.cpp inc/Logic/QPixMapToMatConverter.h inc/Qt/ImageLabel.cpp inc/Qt/ImageLabel.h)
+        inc/Qt/IConnectMediator.h inc/Qt/ConnectMediator.cpp inc/Qt/ConnectMediator.h inc/Logic/ILabelImageLoader.h inc/Qt/IImageLabel.h inc/Logic/IQPixMapToMatConverter.h inc/Logic/QPixMapToMatConverter.cpp inc/Logic/QPixMapToMatConverter.h inc/Qt/ImageLabel.cpp inc/Qt/ImageLabel.h inc/Logic/LabelImageLoader.cpp inc/Logic/LabelImageLoader.h)
 
 find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )

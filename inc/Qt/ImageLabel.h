@@ -12,6 +12,7 @@ public:
 
     const QPixmap* getPixMap() override;
 
+    void reformSize(QSize size) override;
 };
 
 
