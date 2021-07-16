@@ -6,6 +6,15 @@
 #define BETBOOMTESTTASK_IMAGECURSORCONTROLLER_H
 
 #include "IImageCursorController.h"
+
+enum class mouseDoState
+{
+    none,
+    setStartDot,
+    setEndDot,
+};
+
+
 class ImageCursorController: public IImageCursorController{
 public:
 
@@ -16,8 +25,18 @@ protected:
 
     void mousePressEvent(QMouseEvent *ev) override;
 
+public slots:
+
+    void setStartDot();
+    void setEndDot();
+
+signals:
+
+    void dotSet();
+
 private:
 
+    mouseDoState m_state = mouseDoState::none;
     QLabel *m_label;
 
 };
