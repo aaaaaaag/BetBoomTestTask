@@ -2,7 +2,7 @@
 // Created by denis on 16.07.2021.
 //
 
-#include "ConnectMediator.h"
+#include "Qt/ConnectMediator.h"
 
 void ConnectMediator::emitSetStartPoint() {
     emit setStartPoint();

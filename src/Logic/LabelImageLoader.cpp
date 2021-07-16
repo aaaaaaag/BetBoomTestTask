@@ -2,7 +2,7 @@
 // Created by denis on 16.07.2021.
 //
 
-#include "LabelImageLoader.h"
+#include "Logic/LabelImageLoader.h"
 #include "Qt/ImageLabel.h"
 QLabel *LabelImageLoader::loadImageToLabel(std::string path) {
     QPixmap pixmap(path.data());

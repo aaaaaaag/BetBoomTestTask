@@ -2,7 +2,7 @@
 // Created by denis on 16.07.2021.
 //
 
-#include "ImageCursorController.h"
+#include "Logic/ImageCursorController.h"
 
 QPointF ImageCursorController::getMousePos(QMouseEvent *event) {
     return event->pos();
