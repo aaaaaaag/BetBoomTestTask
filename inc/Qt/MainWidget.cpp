@@ -3,3 +3,13 @@
 //
 
 #include "MainWidget.h"
+
+MainWidget::MainWidget(std::string imgPath, QWidget *parent): QMainWindow(parent),
+                                                              ui(new Ui::MainWindow) {
+    ui->setupUi(this);
+
+}
+
+MainWidget::~MainWidget() {
+    delete ui;
+}
