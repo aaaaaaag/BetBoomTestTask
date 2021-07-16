@@ -11,7 +11,9 @@ set(REQUIRED_LIBS Core Gui Widgets)
 set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets)
 
 
-add_library(${PROJECT_NAME} inc/Qt/MainWidget.cpp inc/Qt/MainWidget.h inc/Logic/OpenCVWrapper.cpp inc/Logic/OpenCVWrapper.h inc/Logic/IOpenCVWrapper.h)
+add_library(${PROJECT_NAME} inc/Qt/MainWidget.cpp inc/Qt/MainWidget.h inc/Logic/OpenCVWrapper.cpp inc/Logic/OpenCVWrapper.h inc/Logic/IOpenCVWrapper.h
+        inc/Logic/IImageCursorController.h inc/Logic/ImageCursorController.cpp inc/Logic/ImageCursorController.h
+        inc/Qt/IConnectMediator.h inc/Qt/ConnectMediator.cpp inc/Qt/ConnectMediator.h)
 
 find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
