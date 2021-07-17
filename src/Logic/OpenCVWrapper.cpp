@@ -16,3 +16,7 @@ void OpenCVWrapper::setMatPix(int x, int y, cv::Vec3b pix) {
     m_imageMatrix.at<cv::Vec3b>(x, y) = pix;
 }
 
+cv::Mat OpenCVWrapper::getMat() {
+    return m_imageMatrix;
+}
+

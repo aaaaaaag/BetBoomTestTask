@@ -16,6 +16,8 @@ public:
 
     void setMatPix(int x, int y, cv::Vec3b pix) override;
 
+    cv::Mat getMat() override;
+
 private:
 
     cv::Mat m_imageMatrix;
