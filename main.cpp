@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <Qt/ConnectMediator.h>
 #include "Qt/MainWidget.h"
 #include "Logic/ImageCursorController.h"
 #include "Logic/LabelImageLoader.h"
@@ -21,16 +22,16 @@ int main(int argc, char *argv[]) {
     auto pathSearcher = std::make_shared<PathSearcher>(openCvWrapper);
 
     auto matHandler = std::make_shared<MatHandler>(openCvWrapper, pathSearcher);
+    auto connector = new ConnectMediator;
+
+    auto cursorController = new ImageCursorController(connector, matHandler);
+    cursorController->setPixmap(*label->pixmap());
 
 
-    auto cursorController = std::make_shared<ImageCursorController>(label, matHandler);
 
 
 
-
-
-
-    MainWidget widget(label);
+    MainWidget widget(cursorController, connector);
     widget.show();
 
     return QApplication::exec();

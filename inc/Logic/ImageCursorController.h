@@ -9,6 +9,8 @@
 #include "IImageCursorController.h"
 #include "IMatHandler.h"
 #include "utility"
+#include "Qt/ImageLabel.h"
+#include "Qt/IConnectMediator.h"
 
 enum class mouseDoState
 {
@@ -18,29 +20,27 @@ enum class mouseDoState
 };
 
 
-class ImageCursorController: public IImageCursorController{
-public:
+class ImageCursorController: public ImageLabel{
 
-    explicit ImageCursorController(QLabel *label, std::shared_ptr<IMatHandler> matHandler);
-
-protected:
-    QPoint getMousePos(QMouseEvent *event) override;
-
-    void mousePressEvent(QMouseEvent *ev) override;
+    Q_OBJECT
 
 public slots:
 
     void setStartDot();
     void setEndDot();
 
-signals:
+public:
 
-    void dotSet();
+    explicit ImageCursorController(IConnectMediator* mediator, std::shared_ptr<IMatHandler> matHandler);
+
+protected:
+    static QPoint getMousePos(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *ev) override;
 
 private:
     std::shared_ptr<IMatHandler> m_pMatHandler;
     mouseDoState m_state = mouseDoState::none;
-    QLabel *m_label;
+    QLabel *m_label{};
 
 };
 

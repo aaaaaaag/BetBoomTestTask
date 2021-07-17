@@ -8,6 +8,7 @@
 #include "Qt/MainWindow.h"
 #include <qt5/QtWidgets/QMainWindow>
 #include "string"
+#include "Qt/IConnectMediator.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,7 +22,7 @@ class MainWidget: public  QMainWindow {
 
 public:
 
-    explicit MainWidget(QLabel* label, QWidget *parent = nullptr);
+    explicit MainWidget(QLabel* label, IConnectMediator* mediator, QWidget *parent = nullptr);
     ~MainWidget() override;
 
 protected:
