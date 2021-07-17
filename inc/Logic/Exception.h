@@ -55,4 +55,13 @@ public:
     }
 };
 
+class GetResultWithoutInitDotsException: public Exception
+{
+public:
+    explicit GetResultWithoutInitDotsException(std::string ex)
+    {
+        m_exception = std::move(ex);
+    }
+};
+
 #endif //BETBOOMTESTTASK_EXCEPTION_H

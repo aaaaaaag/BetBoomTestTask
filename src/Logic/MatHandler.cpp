@@ -9,7 +9,9 @@
 #include "Logic/Exception.h"
 #define SEARCH_RAD 7
 
-MatHandler::MatHandler(std::shared_ptr<IOpenCVWrapper> wrapper): m_pWrapper(std::move(wrapper)) {
+MatHandler::MatHandler(std::shared_ptr<IOpenCVWrapper> wrapper, std::shared_ptr<IPathSearcher> pathSearcher):
+m_pWrapper(std::move(wrapper)),
+m_pPathSearcher(std::move(pathSearcher)){
 }
 
 void MatHandler::SetStartDot(QPoint dot) {
@@ -30,10 +32,14 @@ void MatHandler::SetEndDot(QPoint dot) {
     m_endDot = dot;
 }
 
-void MatHandler::GetResultPix() {
-
+int MatHandler::GetResultPix() {
+    if (!m_isStartSet)
+        throw GetResultWithoutInitDotsException("start point not set");
+    if (!m_isEndSet)
+        throw GetResultWithoutInitDotsException("end point not set");
+    return m_pPathSearcher->GetNearestPath(m_startDot, m_endDot);
 }
 
-void MatHandler::GetResultMM() {
+int MatHandler::GetResultMM() {
 
 }

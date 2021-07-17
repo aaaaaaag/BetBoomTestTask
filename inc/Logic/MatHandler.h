@@ -8,19 +8,19 @@
 #include "IMatHandler.h"
 #include "IOpenCVWrapper.h"
 #include "utility"
-
+#include "IPathSearcher.h"
 class MatHandler: public IMatHandler{
 public:
 
-    explicit MatHandler(std::shared_ptr<IOpenCVWrapper> wrapper);
+    explicit MatHandler(std::shared_ptr<IOpenCVWrapper> wrapper, std::shared_ptr<IPathSearcher> pathSearcher);
 
     void SetStartDot(QPoint dot) override;
 
     void SetEndDot(QPoint dot) override;
 
-    void GetResultPix() override;
+    int GetResultPix() override;
 
-    void GetResultMM() override;
+    int GetResultMM() override;
 
 private:
 
@@ -29,7 +29,7 @@ private:
     bool m_isStartSet = false;
     bool m_isEndSet = false;
     std::shared_ptr<IOpenCVWrapper> m_pWrapper;
-
+    std::shared_ptr<IPathSearcher> m_pPathSearcher;
 };
 
 
