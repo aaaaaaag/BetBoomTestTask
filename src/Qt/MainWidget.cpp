@@ -3,11 +3,19 @@
 //
 
 #include "Qt/MainWidget.h"
+#include "Qt/ConnectMediator.h"
 
-MainWidget::MainWidget(std::string imgPath, QWidget *parent): QMainWindow(parent),
+MainWidget::MainWidget(QLabel* label, QWidget *parent): QMainWindow(parent),
                                                               ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    ui->image = label;
 
+
+    auto connector = new ConnectMediator;
+    connector->connectSetStartPoint(ui->button_set_start_point);
+    connector->connectSetEndPoint(ui->butto_set_end_point);
+    connector->connectGetResultMM(ui->button_get_res_mm);
+    connector->connectGetResultPix(ui->button_get_res_pix);
 }
 
 MainWidget::~MainWidget() {

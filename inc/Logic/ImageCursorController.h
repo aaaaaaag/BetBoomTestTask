@@ -5,7 +5,10 @@
 #ifndef BETBOOMTESTTASK_IMAGECURSORCONTROLLER_H
 #define BETBOOMTESTTASK_IMAGECURSORCONTROLLER_H
 
+#include <memory>
 #include "IImageCursorController.h"
+#include "IMatHandler.h"
+#include "utility"
 
 enum class mouseDoState
 {
@@ -18,10 +21,10 @@ enum class mouseDoState
 class ImageCursorController: public IImageCursorController{
 public:
 
-    explicit ImageCursorController(QLabel *label);
+    explicit ImageCursorController(QLabel *label, std::shared_ptr<IMatHandler> matHandler);
 
 protected:
-    QPointF getMousePos(QMouseEvent *event) override;
+    QPoint getMousePos(QMouseEvent *event) override;
 
     void mousePressEvent(QMouseEvent *ev) override;
 
@@ -35,7 +38,7 @@ signals:
     void dotSet();
 
 private:
-
+    std::shared_ptr<IMatHandler> m_pMatHandler;
     mouseDoState m_state = mouseDoState::none;
     QLabel *m_label;
 

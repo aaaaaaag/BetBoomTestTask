@@ -4,7 +4,7 @@
 
 #include "Logic/LabelImageLoader.h"
 #include "Qt/ImageLabel.h"
-QLabel *LabelImageLoader::loadImageToLabel(std::string path) {
+IImageLabel *LabelImageLoader::loadImageToLabel(std::string path) {
     QPixmap pixmap(path.data());
     int w = pixmap.width();
     int h = pixmap.height();

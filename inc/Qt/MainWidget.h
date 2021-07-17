@@ -21,7 +21,7 @@ class MainWidget: public  QMainWindow {
 
 public:
 
-    MainWidget(std::string imgPath, QWidget *parent = nullptr);
+    MainWidget(QLabel* label, QWidget *parent = nullptr);
     ~MainWidget() override;
 
 protected:

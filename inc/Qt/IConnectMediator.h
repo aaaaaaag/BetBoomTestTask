@@ -8,6 +8,9 @@
 #include "Qt/MainWindow.h"
 
 class IConnectMediator: public QObject{
+
+    Q_OBJECT
+
 public:
 
     virtual void connectSetStartPoint(QPushButton *button) = 0;

@@ -11,7 +11,7 @@
 class IImageCursorController: public QLabel{
 protected:
 
-    virtual QPointF getMousePos(QMouseEvent *event) = 0;
+    virtual QPoint getMousePos(QMouseEvent *event) = 0;
 
 };
 

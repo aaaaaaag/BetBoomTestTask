@@ -9,7 +9,7 @@
 class LabelImageLoader: public ILabelImageLoader{
 public:
 
-    QLabel *loadImageToLabel(std::string path) override;
+    IImageLabel *loadImageToLabel(std::string path) override;
 };
 
 

@@ -7,6 +7,7 @@
 
 #include "IConnectMediator.h"
 class ConnectMediator: public IConnectMediator{
+    Q_OBJECT
 public:
 
     void connectSetStartPoint(QPushButton *button) override;
