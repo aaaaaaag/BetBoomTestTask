@@ -2,10 +2,10 @@
 // Created by denis on 17.07.2021.
 //
 
-#include "MatHandler.h"
+#include "Logic/MatHandler.h"
 
 #include <utility>
-#include "DotChecker.h"
+#include "Logic/DotChecker.h"
 
 #define SEARCH_RAD 7
 
