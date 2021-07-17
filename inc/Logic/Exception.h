@@ -46,4 +46,13 @@ public:
     }
 };
 
+class FailFindRoadException: public Exception
+{
+public:
+    explicit FailFindRoadException(std::string ex)
+    {
+        m_exception = std::move(ex);
+    }
+};
+
 #endif //BETBOOMTESTTASK_EXCEPTION_H
