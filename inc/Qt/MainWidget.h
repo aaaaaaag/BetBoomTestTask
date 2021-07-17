@@ -21,7 +21,7 @@ class MainWidget: public  QMainWindow {
 
 public:
 
-    MainWidget(QLabel* label, QWidget *parent = nullptr);
+    explicit MainWidget(QLabel* label, QWidget *parent = nullptr);
     ~MainWidget() override;
 
 protected:

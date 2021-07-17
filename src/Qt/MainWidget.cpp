@@ -7,9 +7,11 @@
 
 MainWidget::MainWidget(QLabel* label, QWidget *parent): QMainWindow(parent),
                                                               ui(new Ui::MainWindow) {
-    ui->setupUi(this);
-    ui->image = label;
+    //ui->image = label;
 
+    ui->setupUi(this);
+
+    ui->horizontalLayout->addWidget(label);
 
     auto connector = new ConnectMediator;
     connector->connectSetStartPoint(ui->button_set_start_point);

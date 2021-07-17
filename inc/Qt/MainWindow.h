@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'MainWindowyyaUOG.ui'
+** Form generated from reading UI file 'MainWindowiXGgfK.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.11.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MAINWINDOWYYAUOG_H
-#define MAINWINDOWYYAUOG_H
+#ifndef MAINWINDOWIXGGFK_H
+#define MAINWINDOWIXGGFK_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -36,7 +36,6 @@ public:
     QPushButton *butto_set_end_point;
     QPushButton *button_get_res_pix;
     QPushButton *button_get_res_mm;
-    QLabel *image;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -94,13 +93,7 @@ public:
         horizontalLayout->addLayout(menu_layout);
 
 
-        gridLayout->addLayout(horizontalLayout, 0, 1, 1, 1);
-
-        image = new QLabel(centralwidget);
-        image->setObjectName(QStringLiteral("image"));
-        image->setMinimumSize(QSize(900, 0));
-
-        gridLayout->addWidget(image, 0, 0, 1, 1);
+        gridLayout->addLayout(horizontalLayout, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -125,7 +118,6 @@ public:
         butto_set_end_point->setText(QApplication::translate("MainWindow", "Set end point", nullptr));
         button_get_res_pix->setText(QApplication::translate("MainWindow", "Get result(pix)", nullptr));
         button_get_res_mm->setText(QApplication::translate("MainWindow", "Get result(mm)", nullptr));
-        image->setText(QString());
     } // retranslateUi
 
 };
@@ -136,4 +128,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MAINWINDOWYYAUOG_H
+#endif // MAINWINDOWIXGGFK_H
