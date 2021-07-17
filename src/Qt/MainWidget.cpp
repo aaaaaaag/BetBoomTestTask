@@ -12,6 +12,7 @@ MainWidget::MainWidget(QLabel* label, IConnectMediator* mediator, QWidget *paren
     ui->setupUi(this);
 
     ui->horizontalLayout->addWidget(label);
+    this->setFixedSize(1200, 900);
     mediator->connectSetStartPoint(ui->button_set_start_point);
     mediator->connectSetEndPoint(ui->butto_set_end_point);
     mediator->connectGetResultMM(ui->button_get_res_mm);
