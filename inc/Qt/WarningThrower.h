@@ -8,10 +8,10 @@
 #include "IWarningThrower.h"
 
 //QMessageBox::critical(this, "Ошибка ", "Неверный ввод координат.", QMessageBox::Ok);
-class WarningThrower: public QWidget {
+class WarningThrower {
 public:
 
-    void ShowWarning(Exception *ex);
+    static void ShowWarning(Exception *ex);
 
 };
 

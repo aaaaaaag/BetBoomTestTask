@@ -7,7 +7,7 @@
 
 #include "Logic/Exception.h"
 #include "QWidget"
-class IWarningThrower: public QWidget
+class IWarningThrower
 {
 public:
 
