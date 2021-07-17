@@ -6,7 +6,8 @@
 #include "Qt/IConnectMediator.h"
 #include <utility>
 #include <iostream>
-
+#include "Logic/Exception.h"
+#include "Qt/WarningThrower.h"
 QPoint ImageCursorController::getMousePos(QMouseEvent *event) {
     return event->pos();
 }
@@ -15,16 +16,24 @@ void ImageCursorController::mousePressEvent(QMouseEvent *ev) {
     std::cout << "Pressed\n";
     if (m_state != mouseDoState::none)
     {
+
         auto pos = getMousePos(ev);
-        switch (m_state) {
-            case mouseDoState::setStartDot:
-                m_pMatHandler->SetStartDot(pos);
-                break;
-            case mouseDoState::setEndDot:
-                m_pMatHandler->SetEndDot(pos);
-                break;
-            default:
-                break;
+        std::cout << "Dot: (" << pos.x() << ", " << pos.y() << ")\n";
+        try {
+            switch (m_state) {
+                case mouseDoState::setStartDot:
+                    m_pMatHandler->SetStartDot(pos);
+                    break;
+                case mouseDoState::setEndDot:
+                    m_pMatHandler->SetEndDot(pos);
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception &ex)
+        {
+            WarningThrower::ShowWarning(&ex);
         }
         m_state = mouseDoState::none;
     }

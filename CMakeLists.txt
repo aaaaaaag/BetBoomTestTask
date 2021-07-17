@@ -13,7 +13,8 @@ set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets)
 
 add_library(${PROJECT_NAME} src/Qt/MainWidget.cpp inc/Qt/MainWidget.h src/Logic/OpenCVWrapper.cpp inc/Logic/OpenCVWrapper.h inc/Logic/IOpenCVWrapper.h
         inc/Logic/IImageCursorController.h src/Logic/ImageCursorController.cpp inc/Logic/ImageCursorController.h
-        inc/Qt/IConnectMediator.h src/Qt/ConnectMediator.cpp inc/Qt/ConnectMediator.h inc/Logic/ILabelImageLoader.h inc/Qt/IImageLabel.h inc/Logic/IQPixMapToMatConverter.h src/Logic/QPixMapToMatConverter.cpp inc/Logic/QPixMapToMatConverter.h src/Qt/ImageLabel.cpp inc/Qt/ImageLabel.h src/Logic/LabelImageLoader.cpp inc/Logic/LabelImageLoader.h inc/Logic/IMatHandler.h src/Logic/MatHandler.cpp inc/Logic/MatHandler.h src/Logic/DotChecker.cpp inc/Logic/DotChecker.h src/Logic/Exception.cpp inc/Logic/Exception.h src/Logic/PathSearcher.cpp inc/Logic/PathSearcher.h inc/Logic/IPathSearcher.h inc/Qt/WarningThrower.cpp inc/Qt/WarningThrower.h inc/Qt/IWarningThrower.h)
+        inc/Qt/IConnectMediator.h src/Qt/ConnectMediator.cpp inc/Qt/ConnectMediator.h inc/Logic/ILabelImageLoader.h inc/Qt/IImageLabel.h inc/Logic/IQPixMapToMatConverter.h src/Logic/QPixMapToMatConverter.cpp inc/Logic/QPixMapToMatConverter.h src/Qt/ImageLabel.cpp inc/Qt/ImageLabel.h src/Logic/LabelImageLoader.cpp inc/Logic/LabelImageLoader.h inc/Logic/IMatHandler.h src/Logic/MatHandler.cpp inc/Logic/MatHandler.h src/Logic/DotChecker.cpp inc/Logic/DotChecker.h src/Logic/Exception.cpp inc/Logic/Exception.h src/Logic/PathSearcher.cpp inc/Logic/PathSearcher.h inc/Logic/IPathSearcher.h inc/Qt/WarningThrower.cpp inc/Qt/WarningThrower.h inc/Qt/IWarningThrower.h
+        inc/Qt/WarningThrower.h inc/Qt/WarningThrower.cpp)
 
 find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
