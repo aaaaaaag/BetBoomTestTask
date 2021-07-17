@@ -9,7 +9,10 @@
 
 #include "string"
 
-class Exception {
+class Exception: public std::exception{
+public:
+    Exception() = default;
+
     explicit Exception(std::string exception)
     {
         m_exception =  std::move(exception);
@@ -20,15 +23,27 @@ class Exception {
         return m_exception;
     };
 
-private:
+protected:
 
     std::string m_exception;
 };
 
 class WrongChooseDotException: public Exception
 {
-
+public:
+   explicit WrongChooseDotException(std::string ex)
+   {
+       m_exception = std::move(ex);
+   }
 };
 
+class FailFindRoadStartException: public Exception
+{
+public:
+    explicit FailFindRoadStartException(std::string ex)
+    {
+        m_exception = std::move(ex);
+    }
+};
 
 #endif //BETBOOMTESTTASK_EXCEPTION_H
