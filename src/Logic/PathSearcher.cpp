@@ -9,7 +9,7 @@
 
 PathSearcher::PathSearcher(std::shared_ptr<IOpenCVWrapper> wrapper): m_wrapper(std::move(wrapper)) {
     m_highColor = {0, 0, 0};
-    m_lowColor = {200, 200, 200};
+    m_lowColor = {50, 50, 50};
 }
 
 void PathSearcher::updateWrapper(std::shared_ptr<IOpenCVWrapper> wrapper) {
@@ -28,6 +28,7 @@ int PathSearcher::GetNearestPath(QPoint start, QPoint end) {
         if (path.size() < minLen)
             minLen = path.size();
     }
+    m_vPaths.clear();
     return static_cast<int>(minLen);
 }
 
@@ -37,9 +38,12 @@ std::vector<QPoint> PathSearcher::getNearDots(QPoint dot) {
     vPoints.emplace_back(dot.x() - 1, dot.y());
     vPoints.emplace_back(dot.x(), dot.y() + 1);
     vPoints.emplace_back(dot.x(), dot.y() - 1);
+    return vPoints;
 }
 
 void PathSearcher::GetPathRec(QPoint start, QPoint end, std::vector<QPoint> curPath) {
+    if (m_vPaths.size() > 100)
+        return;
     auto nearDots = getNearDots(start);
     for (auto dot: nearDots)
     {
@@ -47,11 +51,17 @@ void PathSearcher::GetPathRec(QPoint start, QPoint end, std::vector<QPoint> curP
             continue;
         if (!isColorNeed(m_wrapper->getMatPix(dot.x(), dot.y())))
             continue;
-
+//        if (!isColorNeed(m_wrapper->getMatPix(dot.x(), dot.y()))) {
+//
+//        }
+        std::cout << "Cur dot = (" << start.x() << ", " << start.y() << ")\n";
+        std::cout << "End dot = (" << end.x() << ", " << end.y() << ")\n";
         auto copyPath = curPath;
         copyPath.push_back(dot);
-        if (dot == end)
+        if (dot == end) {
             m_vPaths.push_back(curPath);
+            std::cout << "ADDED!!! cur size = " << m_vPaths.size() << std::endl;
+        }
         else
             GetPathRec(dot, end, copyPath);
     }
