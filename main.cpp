@@ -13,9 +13,8 @@ int main(int argc, char *argv[]) {
 
     auto labelLoader = std::make_shared<LabelImageLoader>();
     auto label = labelLoader->loadImageToLabel(pathToImage);
-    label->reformSize(QSize(1100, 900));
+    label->reformSize(QSize(960, 540));
     //label->show();
-
     auto openCvWrapper = std::make_shared<OpenCVWrapper>();
     openCvWrapper->loadImage(pathToImage);
 
