@@ -15,7 +15,7 @@ public:
     virtual void SetStartDot(QPoint dot) = 0;
     virtual void SetEndDot(QPoint dot) = 0;
     virtual int GetResultPix() = 0;
-    virtual int GetResultMM() = 0;
+    virtual double GetResultMM() = 0;
 };
 
 #endif //BETBOOMTESTTASK_IMATHANDLER_H

@@ -48,7 +48,7 @@ int MatHandler::GetResultPix() {
     return res / 2;
 }
 
-int MatHandler::GetResultMM() {
+double MatHandler::GetResultMM() {
     if (!m_isStartSet)
         throw GetResultWithoutInitDotsException("start point not set");
     if (!m_isEndSet)
@@ -59,5 +59,8 @@ int MatHandler::GetResultMM() {
     m_pWrapper->setMatCopy();
     m_isStartSet = false;
     m_isEndSet = false;
-    return res / 200 * 12,8;
+    res /= 200;
+    double resD = res;
+    resD *= 12,8;
+    return resD;
 }

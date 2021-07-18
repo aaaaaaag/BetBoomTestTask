@@ -9,7 +9,8 @@
 #include <qt5/QtWidgets/QMainWindow>
 #include "string"
 #include "Qt/IConnectMediator.h"
-
+#include "memory"
+#include "Logic/IMatHandler.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
     class MainWindow;
@@ -22,14 +23,15 @@ class MainWidget: public  QMainWindow {
 
 public:
 
-    explicit MainWidget(QLabel* label, IConnectMediator* mediator, QWidget *parent = nullptr);
+    explicit MainWidget(QLabel* label, IConnectMediator* mediator, std::shared_ptr<IMatHandler> matHandler, QWidget *parent = nullptr);
     ~MainWidget() override;
 
-protected:
-
+protected slots:
+    void getResPix();
+    void getResMM();
 
 private:
-
+    std::shared_ptr<IMatHandler> m_pMatHandler;
     Ui::MainWindow* ui;
 
 

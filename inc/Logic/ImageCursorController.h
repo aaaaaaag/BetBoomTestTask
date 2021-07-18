@@ -28,7 +28,7 @@ public slots:
 
     void setStartDot();
     void setEndDot();
-    void res();
+
 public:
 
     explicit ImageCursorController(IConnectMediator* mediator, std::shared_ptr<IMatHandler> matHandler);

@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
 
 
-    MainWidget widget(cursorController, connector);
+    MainWidget widget(cursorController, connector, matHandler);
     widget.show();
 
     return QApplication::exec();

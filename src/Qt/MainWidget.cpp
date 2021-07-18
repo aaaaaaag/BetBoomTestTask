@@ -3,10 +3,13 @@
 //
 
 #include "Qt/MainWidget.h"
+#include <utility>
 #include "Qt/ConnectMediator.h"
-
-MainWidget::MainWidget(QLabel* label, IConnectMediator* mediator, QWidget *parent): QMainWindow(parent),
-                                                              ui(new Ui::MainWindow) {
+#include "Logic/Exception.h"
+#include "Qt/WarningThrower.h"
+MainWidget::MainWidget(QLabel* label, IConnectMediator* mediator, std::shared_ptr<IMatHandler> matHandler, QWidget *parent): QMainWindow(parent),
+                                                              ui(new Ui::MainWindow),
+                                                              m_pMatHandler(std::move(matHandler)){
     //ui->image = label;
 
     ui->setupUi(this);
@@ -17,8 +20,36 @@ MainWidget::MainWidget(QLabel* label, IConnectMediator* mediator, QWidget *paren
     mediator->connectSetEndPoint(ui->butto_set_end_point);
     mediator->connectGetResultMM(ui->button_get_res_mm);
     mediator->connectGetResultPix(ui->button_get_res_pix);
+    connect(mediator, SIGNAL(getResultPix()), this, SLOT(getResPix()));
+    connect(mediator, SIGNAL(getResultMM()), this, SLOT(getResMM()));
 }
 
 MainWidget::~MainWidget() {
     delete ui;
+}
+
+void MainWidget::getResPix() {
+    try {
+        auto res = m_pMatHandler->GetResultPix();
+        QString resStr;
+        resStr.append(std::to_string(res).data());
+        ui->result->setText(resStr);
+    }
+    catch (Exception &ex)
+    {
+        WarningThrower::ShowWarning(&ex);
+    }
+}
+
+void MainWidget::getResMM() {
+    try {
+        auto res = m_pMatHandler->GetResultMM();
+        QString resStr;
+        resStr.append(std::to_string(res).data());
+        ui->result->setText(resStr);
+    }
+    catch (Exception &ex)
+    {
+        WarningThrower::ShowWarning(&ex);
+    }
 }

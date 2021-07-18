@@ -52,7 +52,6 @@ m_pMatHandler(std::move(matHandler))
     //connect(this, SIGNAL(mousePressEvent(QMouseEvent *)), this, SLOT(mousePressEvent(QMouseEvent *)));
     connect(mediator, SIGNAL(setStartPoint()), this, SLOT(setStartDot()));
     connect(mediator, SIGNAL(setEndPoint()), this, SLOT(setEndDot()));
-    connect(mediator, SIGNAL(getResultPix()), this, SLOT(res()));
 }
 
 void ImageCursorController::setStartDot() {
@@ -65,15 +64,5 @@ void ImageCursorController::setEndDot() {
     m_state = mouseDoState::setEndDot;
 }
 
-void ImageCursorController::res() {
-    try {
-        auto res = m_pMatHandler->GetResultPix();
-        std::cout << "Fucking res getted!!!!!!!!! = " << res << std::endl;
-    }
-    catch (Exception &ex)
-    {
-        WarningThrower::ShowWarning(&ex);
-    }
-}
 
 

@@ -20,7 +20,7 @@ public:
 
     int GetResultPix() override;
 
-    int GetResultMM() override;
+    double GetResultMM() override;
 
 private:
 
