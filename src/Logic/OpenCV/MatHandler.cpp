@@ -15,7 +15,7 @@ m_pPathSearcher(std::move(pathSearcher)){
 }
 
 void MatHandler::SetStartDot(QPoint dot) {
-    if (!DotChecker::IsDotCorrect(m_pWrapper, dot, SEARCH_RAD))
+    if (!DotChecker::IsDotCorrect(m_pWrapper, dot, SEARCH_RAD, cv::Vec3b(0, 0, 255)))
     {
         throw WrongChooseDotException(std::string("start dot incorrect"));
     }
@@ -24,7 +24,7 @@ void MatHandler::SetStartDot(QPoint dot) {
 }
 
 void MatHandler::SetEndDot(QPoint dot) {
-    if (!DotChecker::IsDotCorrect(m_pWrapper, dot, SEARCH_RAD))
+    if (!DotChecker::IsDotCorrect(m_pWrapper, dot, SEARCH_RAD, cv::Vec3b(0, 0, 255)))
     {
         throw WrongChooseDotException(std::string("end dot incorrect"));
     }
@@ -37,8 +37,8 @@ int MatHandler::GetResultPix() {
     m_isStartSet = false;
     m_isEndSet = false;
 
-    auto start = DotChecker::GetStartRoadDot(m_pWrapper, m_startDot, SEARCH_RAD);
-    auto end = DotChecker::GetStartRoadDot(m_pWrapper, m_endDot, SEARCH_RAD);
+    auto start = DotChecker::GetStartRoadDot(m_pWrapper, m_startDot, SEARCH_RAD, cv::Vec3b(0, 0, 0));
+    auto end = DotChecker::GetStartRoadDot(m_pWrapper, m_endDot, SEARCH_RAD, cv::Vec3b(0, 0, 0));
 
     auto res = m_pPathSearcher->GetNearestPath(start, end);
     return res / 2;

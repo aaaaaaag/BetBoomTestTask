@@ -11,9 +11,9 @@
 class DotChecker {
 public:
 
-    static bool IsDotCorrect(const std::shared_ptr<IOpenCVWrapper>& wrapper, QPoint point, int rad);
+    static bool IsDotCorrect(const std::shared_ptr<IOpenCVWrapper>& wrapper, QPoint point, int rad, const cv::Vec3b& searchColor);
 
-    static QPoint GetStartRoadDot(const std::shared_ptr<IOpenCVWrapper>& wrapper, QPoint point, int max_rad);
+    static QPoint GetStartRoadDot(const std::shared_ptr<IOpenCVWrapper>& wrapper, QPoint point, int max_rad, const cv::Vec3b& searchColor);
 };
 
 

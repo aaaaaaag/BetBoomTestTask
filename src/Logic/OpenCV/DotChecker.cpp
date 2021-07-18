@@ -4,36 +4,37 @@
 
 #include "Logic/OpenCV/DotChecker.h"
 #include "Logic/Exception.h"
-bool DotChecker::IsDotCorrect(const std::shared_ptr<IOpenCVWrapper>& wrapper, QPoint point, int rad) {
-    auto x = point.x();
-    auto y = point.y();
-    cv::Vec3b searchColor = {0, 0, 255};
-    bool isFind = false;
-    for (int r = 0; r < rad && !isFind; r++)
-    {
-        for (int row = y - r; row <= y + r && !isFind; row++)
-        {
-            for (int col = x - r; col <= x + r && !isFind; col++)
-            {
-                auto color = wrapper->getMatPix(col, row);
-                uint blue = color.val[0];
-                uint green = color.val[1];
-                uint red = color.val[2];
-                if ((searchColor.val[0] <= blue && blue <= searchColor.val[0] + 30) &&
-                    (searchColor.val[1] <= green && green <= searchColor.val[1] + 30) &&
-                    (searchColor.val[2] - 30 <= red && red <= searchColor.val[2])) {
-                    isFind = true;
-                }
-            }
-        }
-    }
-    return isFind;
+
+#define EPS 30
+
+uint uintSubtraction(uint a, int b)
+{
+    if (a < b)
+        return 0;
+    return a - b;
 }
 
-QPoint DotChecker::GetStartRoadDot(const std::shared_ptr<IOpenCVWrapper> &wrapper, QPoint point, int max_rad) {
+uint uintSum(uint a, int b)
+{
+    if (a + b > 255)
+        return 255;
+    return a + b;
+}
+
+bool DotChecker::IsDotCorrect(const std::shared_ptr<IOpenCVWrapper>& wrapper, QPoint point, int rad, const cv::Vec3b& searchColor) {
+    try {
+        GetStartRoadDot(wrapper, point, rad, searchColor);
+    }
+    catch (Exception& ex)
+    {
+        return false;
+    }
+    return true;
+}
+
+QPoint DotChecker::GetStartRoadDot(const std::shared_ptr<IOpenCVWrapper> &wrapper, QPoint point, int max_rad, const cv::Vec3b& searchColor) {
     auto x = point.x();
     auto y = point.y();
-    cv::Vec3b searchColor = {0, 0, 0};
     QPoint dot;
     bool isFind = false;
     for (int r = 0; r < max_rad && !isFind; r++)
@@ -46,9 +47,9 @@ QPoint DotChecker::GetStartRoadDot(const std::shared_ptr<IOpenCVWrapper> &wrappe
                 uint blue = color.val[0];
                 uint green = color.val[1];
                 uint red = color.val[2];
-                if ((searchColor.val[0] <= blue && blue <= searchColor.val[0] + 50) &&
-                    (searchColor.val[1] <= green && green <= searchColor.val[1] + 50) &&
-                    (searchColor.val[2] <= red && red <= searchColor.val[2] + 50)) {
+                if ((uintSubtraction(searchColor.val[0], EPS) <= blue && blue <= uintSum(searchColor.val[0], EPS)) &&
+                    (uintSubtraction(searchColor.val[1], EPS) <= green && green <= uintSum(searchColor.val[1], EPS)) &&
+                    (uintSubtraction(searchColor.val[2], EPS) <= red && red <= uintSum(searchColor.val[2], EPS))) {
                     isFind = true;
                     dot = QPoint(col, row);
                 }
