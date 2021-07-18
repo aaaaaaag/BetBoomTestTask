@@ -2,9 +2,9 @@
 #include "Qt/MainWidget.h"
 #include "Logic/ImageCursorController.h"
 #include "Logic/LabelImageLoader.h"
-#include "Logic/OpenCVWrapper.h"
-#include "Logic/MatHandler.h"
-#include "Logic/PathSearcher.h"
+#include "Logic/OpenCV/OpenCVWrapper.h"
+#include "Logic/OpenCV/MatHandler.h"
+#include "Logic/OpenCV/PathSearcher.h"
 #include "Logic/Facade.h"
 #include "Logic/FacadeSlotWrapper.h"
 

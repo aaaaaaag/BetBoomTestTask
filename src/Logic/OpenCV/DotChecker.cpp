@@ -2,7 +2,7 @@
 // Created by denis on 17.07.2021.
 //
 
-#include "Logic/DotChecker.h"
+#include "Logic/OpenCV/DotChecker.h"
 #include "Logic/Exception.h"
 bool DotChecker::IsDotCorrect(const std::shared_ptr<IOpenCVWrapper>& wrapper, QPoint point, int rad) {
     auto x = point.x();

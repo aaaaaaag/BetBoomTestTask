@@ -6,7 +6,7 @@
 #define BETBOOMTESTTASK_FACADE_H
 
 #include "IFacade.h"
-#include "IMatHandler.h"
+#include "Logic/OpenCV/IMatHandler.h"
 #include "QLabel"
 #include "IImageCursorController.h"
 

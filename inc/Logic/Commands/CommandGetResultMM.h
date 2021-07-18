@@ -6,7 +6,7 @@
 #define BETBOOMTESTTASK_COMMANDGETRESULTMM_H
 
 #include "IButtonCommand.h"
-#include "Logic/IMatHandler.h"
+#include "Logic/OpenCV/IMatHandler.h"
 #include "memory"
 
 

@@ -2,7 +2,7 @@
 // Created by denis on 16.07.2021.
 //
 
-#include "Logic/OpenCVWrapper.h"
+#include "Logic/OpenCV/OpenCVWrapper.h"
 
 void OpenCVWrapper::loadImage(std::string path) {
     m_imageMatrix = cv::imread(path);

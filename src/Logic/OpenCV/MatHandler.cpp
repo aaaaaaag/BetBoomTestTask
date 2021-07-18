@@ -2,10 +2,10 @@
 // Created by denis on 17.07.2021.
 //
 
-#include "Logic/MatHandler.h"
+#include "Logic/OpenCV/MatHandler.h"
 
 #include <utility>
-#include "Logic/DotChecker.h"
+#include "Logic/OpenCV/DotChecker.h"
 #include "Logic/Exception.h"
 #define SEARCH_RAD 15
 

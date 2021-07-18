@@ -7,7 +7,7 @@
 
 #include <memory>
 #include "IImageCursorController.h"
-#include "IMatHandler.h"
+#include "Logic/OpenCV/IMatHandler.h"
 #include "utility"
 #include "Qt/ImageLabel.h"
 #include "QMouseEvent"

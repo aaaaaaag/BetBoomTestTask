@@ -2,7 +2,7 @@
 // Created by denis on 17.07.2021.
 //
 
-#include "Logic/PathSearcher.h"
+#include "Logic/OpenCV/PathSearcher.h"
 #include <utility>
 #include "Logic/Exception.h"
 #include "cmath"
