@@ -9,7 +9,7 @@ IImageLabel *LabelImageLoader::loadImageToLabel(std::string path) {
     int w = pixmap.width();
     int h = pixmap.height();
 
-    auto *lab = new ImageLabel; //TODO maybe fabric method
+    auto *lab = new ImageLabel(QSize(w, h)); //TODO maybe fabric method
 
     lab->setPixmap(pixmap.scaled(w, h, Qt::KeepAspectRatio));
     return lab;

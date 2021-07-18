@@ -11,37 +11,22 @@
 #include "utility"
 #include "Qt/ImageLabel.h"
 #include "Qt/IConnectMediator.h"
-
-enum class mouseDoState
-{
-    none,
-    setStartDot,
-    setEndDot,
-};
+#include "QMouseEvent"
 
 
-class ImageCursorController: public ImageLabel{
-
-    Q_OBJECT
-
-public slots:
-
-    void setStartDot();
-    void setEndDot();
-
+class ImageCursorController: public IImageCursorController{
 public:
 
-    explicit ImageCursorController(IConnectMediator* mediator, std::shared_ptr<IMatHandler> matHandler);
+    explicit ImageCursorController(std::shared_ptr<IMatHandler> matHandler, QSize origImageSize);
+
+    void setState(mouseDoState state) override;
 
 protected:
-    static QPoint getMousePos(QMouseEvent *event);
+    QPoint getMousePos(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *ev) override;
 
 private:
     std::shared_ptr<IMatHandler> m_pMatHandler;
-    mouseDoState m_state = mouseDoState::none;
-    QLabel *m_label{};
-
 };
 
 

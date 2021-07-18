@@ -23,10 +23,12 @@ int main(int argc, char *argv[]) {
     auto matHandler = std::make_shared<MatHandler>(openCvWrapper, pathSearcher);
     auto connector = new ConnectMediator;
 
-    auto cursorController = new ImageCursorController(connector, matHandler);
+    auto cursorController = new ImageCursorController(matHandler, label->getOrigImageSize());
     cursorController->setPixmap(*label->pixmap());
 
 
+    cursorController->reformSize(QSize(960, 540));
+    std::cout << "Before label: (" << cursorController->width() << ", " << cursorController->height() << ")\n";
 
 
 

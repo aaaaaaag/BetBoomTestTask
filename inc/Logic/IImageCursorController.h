@@ -5,13 +5,28 @@
 #ifndef BETBOOMTESTTASK_IIMAGECURSORCONTROLLER_H
 #define BETBOOMTESTTASK_IIMAGECURSORCONTROLLER_H
 
-#include "QMouseEvent"
 #include "QLabel"
+#include "Qt/ImageLabel.h"
 
-class IImageCursorController: public QLabel{
+enum class mouseDoState
+{
+    none,
+    setStartDot,
+    setEndDot,
+};
+
+class IImageCursorController: public ImageLabel{
+public:
+    IImageCursorController() {
+        m_state = mouseDoState::none;
+    }
+
+    ~IImageCursorController() override = default;
+    virtual void setState(mouseDoState state) = 0;
+
 protected:
 
-    virtual QPoint getMousePos(QMouseEvent *event) = 0;
+    mouseDoState m_state;
 
 };
 

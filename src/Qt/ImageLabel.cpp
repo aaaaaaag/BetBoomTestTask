@@ -9,5 +9,14 @@ const QPixmap* ImageLabel::getPixMap() {
 }
 
 void ImageLabel::reformSize(QSize size) {
+    this->setMaximumSize(size);
+    this->setMinimumSize(size);
     this->setPixmap(this->getPixMap()->scaled(size.width(), size.height(), Qt::KeepAspectRatio));
+}
+
+ImageLabel::ImageLabel(QSize origImageSize): m_origImageSize(origImageSize) {
+}
+
+QSize ImageLabel::getOrigImageSize() {
+    return m_origImageSize;
 }

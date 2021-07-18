@@ -3,66 +3,54 @@
 //
 
 #include "Logic/ImageCursorController.h"
-#include "Qt/IConnectMediator.h"
 #include <utility>
 #include <iostream>
 #include "Logic/Exception.h"
 #include "Qt/WarningThrower.h"
 QPoint ImageCursorController::getMousePos(QMouseEvent *event) {
-    return event->pos();
+    auto pos = event->pos();
+
+    auto kx = this->m_origImageSize.height() / this->height();
+    auto ky = this->m_origImageSize.width() / this->width();
+
+    auto x = pos.x() * kx;
+    auto y = pos.y() * ky;
+    pos.setY(x);
+    pos.setX(y);
+
+    return pos;
 }
 
 void ImageCursorController::mousePressEvent(QMouseEvent *ev) {
-    std::cout << "Pressed\n";
-    if (m_state != mouseDoState::none)
-    {
-
-        auto pos = getMousePos(ev);
-        pos.setY(pos.y() - 160);
-
-        auto x = pos.x() * 2;
-        auto y = pos.y() * 2;
-        pos.setY(x);
-        pos.setX(y);
-
-        std::cout << "Dot: (" << pos.x() << ", " << pos.y() << ")\n";
-        try {
-            switch (m_state) {
-                case mouseDoState::setStartDot:
-                    m_pMatHandler->SetStartDot(pos);
-                    break;
-                case mouseDoState::setEndDot:
-                    m_pMatHandler->SetEndDot(pos);
-                    break;
-                default:
-                    break;
-            }
+    auto pos = getMousePos(ev);
+    std::cout << "click coord: (" << pos.x() << ", " << pos.y() << ")\n";
+    try {
+        switch (m_state) {
+            case mouseDoState::setStartDot:
+                m_pMatHandler->SetStartDot(pos);
+                m_state = mouseDoState::none;
+                break;
+            case mouseDoState::setEndDot:
+                m_pMatHandler->SetEndDot(pos);
+                m_state = mouseDoState::none;
+                break;
+            default:
+                break;
         }
-        catch (Exception &ex)
-        {
-            WarningThrower::ShowWarning(&ex);
-        }
-        m_state = mouseDoState::none;
     }
+    catch (Exception &ex)
+    {
+        WarningThrower::ShowWarning(&ex);
+    }
+
 }
 
-ImageCursorController::ImageCursorController(IConnectMediator* mediator, std::shared_ptr<IMatHandler> matHandler):
+void ImageCursorController::setState(mouseDoState state) {
+    m_state = state;
+}
+
+ImageCursorController::ImageCursorController(std::shared_ptr<IMatHandler> matHandler, QSize origImageSize):
 m_pMatHandler(std::move(matHandler))
 {
-    //connect(this, SIGNAL(mousePressEvent(QMouseEvent *)), this, SLOT(mousePressEvent(QMouseEvent *)));
-    connect(mediator, SIGNAL(setStartPoint()), this, SLOT(setStartDot()));
-    connect(mediator, SIGNAL(setEndPoint()), this, SLOT(setEndDot()));
+    this->m_origImageSize = origImageSize;
 }
-
-void ImageCursorController::setStartDot() {
-    std::cout << "setStartDot pressed!\n";
-    m_state = mouseDoState::setStartDot;
-}
-
-void ImageCursorController::setEndDot() {
-    std::cout << "setEndDot pressed!\n";
-    m_state = mouseDoState::setEndDot;
-}
-
-
-

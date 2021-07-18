@@ -10,9 +10,15 @@
 class ImageLabel: public IImageLabel{
 public:
 
+    ImageLabel() = default;
+    explicit ImageLabel(QSize origImageSize);
     const QPixmap* getPixMap() override;
-
     void reformSize(QSize size) override;
+    QSize getOrigImageSize() override;
+protected:
+
+    QSize m_origImageSize = QSize(0, 0);
+
 };
 
 

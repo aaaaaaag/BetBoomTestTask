@@ -14,10 +14,7 @@ public:
 
     virtual const QPixmap* getPixMap() = 0;
     virtual void reformSize(QSize size) = 0;
-signals:
-
-    void ImageChanged();
-
+    virtual QSize getOrigImageSize() = 0;
 };
 
 

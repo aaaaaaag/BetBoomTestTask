@@ -4,6 +4,7 @@
 
 #include "Qt/MainWidget.h"
 #include <utility>
+#include <iostream>
 #include "Qt/ConnectMediator.h"
 #include "Logic/Exception.h"
 #include "Qt/WarningThrower.h"
@@ -17,9 +18,11 @@ MainWidget::MainWidget(QLabel* label, IConnectMediator* mediator, std::shared_pt
     //ui->image = label;
 
     ui->setupUi(this);
-
+    std::cout << "Before main: (" << this->width() << ", " << this->height() << ")\n";
     ui->horizontalLayout->addWidget(label);
-    this->setFixedSize(1200, 900);
+    //this->setFixedSize(1200, 900);
+    std::cout << "After label: (" << label->width() << ", " << label->height() << ")\n";
+    std::cout << "After main: (" << this->width() << ", " << this->height() << ")\n";
     mediator->connectSetStartPoint(ui->button_set_start_point);
     mediator->connectSetEndPoint(ui->butto_set_end_point);
     mediator->connectGetResultMM(ui->button_get_res_mm);
