@@ -10,12 +10,19 @@
 #include "Logic/Commands/CommandGetResultPix.h"
 #include "Logic/Exception.h"
 
-void Facade::setStartDot() {
+Facade::Facade(std::shared_ptr<IMatHandler> matHandler, std::shared_ptr<IImageCursorController> cursorController, QLabel *label):
+        m_pMatHandler(std::move(matHandler)),
+        m_pResLabel(label),
+        m_pCursorController(std::move(cursorController))
+{
+}
 
+void Facade::setStartDot() {
+    m_pCursorController->setState(mouseDoState::setStartDot);
 }
 
 void Facade::setEndDot() {
-
+    m_pCursorController->setState(mouseDoState::setEndDot);
 }
 
 void Facade::getResultPix() {
@@ -46,8 +53,4 @@ void Facade::getResultMM() {
     }
 }
 
-Facade::Facade(std::shared_ptr<IMatHandler> matHandler, QLabel *label):
-m_pMatHandler(std::move(matHandler)),
-m_pResLabel(label)
-{
-}
+
