@@ -10,7 +10,6 @@
 #include "IMatHandler.h"
 #include "utility"
 #include "Qt/ImageLabel.h"
-#include "Qt/IConnectMediator.h"
 #include "QMouseEvent"
 
 
