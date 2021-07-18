@@ -2,7 +2,7 @@
 // Created by denis on 18.07.2021.
 //
 
-#include "CommandGetResultMM.h"
+#include "Logic/Commands/CommandGetResultMM.h"
 #include <utility>
 
 CommandGetResultMM::CommandGetResultMM(std::shared_ptr<IMatHandler> matHandler, double &res):

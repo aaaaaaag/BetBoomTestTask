@@ -2,7 +2,7 @@
 // Created by denis on 18.07.2021.
 //
 
-#include "CommandGetResultPix.h"
+#include "Logic/Commands/CommandGetResultPix.h"
 
 #include <utility>
 
