@@ -2,7 +2,7 @@
 // Created by denis on 18.07.2021.
 //
 
-#include "CommandSetEndPoint.h"
+#include "Logic/Commands/CommandSetEndPoint.h"
 
 void CommandSetEndPoint::execute() {
     m_controller->setState(mouseDoState::setEndDot);

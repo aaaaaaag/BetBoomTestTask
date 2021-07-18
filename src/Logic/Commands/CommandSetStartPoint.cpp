@@ -2,7 +2,7 @@
 // Created by denis on 18.07.2021.
 //
 
-#include "CommandSetStartPoint.h"
+#include "Logic/Commands/CommandSetStartPoint.h"
 
 CommandSetStartPoint::CommandSetStartPoint(IImageCursorController *controller):
 m_controller(controller)
