@@ -8,7 +8,7 @@
 #include "IFacade.h"
 #include "Logic/OpenCV/IMatHandler.h"
 #include "QLabel"
-#include "IImageCursorController.h"
+#include "Qt/IImageCursorController.h"
 
 class Facade: public IFacade{
 public:

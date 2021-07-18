@@ -6,7 +6,7 @@
 #define BETBOOMTESTTASK_COMMANDSETSTARTPOINT_H
 
 #include "IButtonCommand.h"
-#include "Logic/IImageCursorController.h"
+#include "Qt/IImageCursorController.h"
 
 class CommandSetStartPoint: public IButtonCommand{
 public:

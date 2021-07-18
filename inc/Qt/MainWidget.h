@@ -9,7 +9,7 @@
 #include <qt5/QtWidgets/QMainWindow>
 #include "string"
 #include "memory"
-#include "Logic/FacadeSlotWrapper.h"
+#include "FacadeSlotWrapper.h"
 #include "QLabel"
 
 QT_BEGIN_NAMESPACE

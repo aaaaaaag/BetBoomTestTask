@@ -2,7 +2,7 @@
 // Created by denis on 16.07.2021.
 //
 
-#include "Logic/ImageCursorController.h"
+#include "Qt/ImageCursorController.h"
 #include <utility>
 #include <iostream>
 #include "Logic/Exception.h"

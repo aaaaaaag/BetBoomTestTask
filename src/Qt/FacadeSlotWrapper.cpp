@@ -2,7 +2,7 @@
 // Created by denis on 18.07.2021.
 //
 
-#include "Logic/FacadeSlotWrapper.h"
+#include "Qt/FacadeSlotWrapper.h"
 
 #include <utility>
 

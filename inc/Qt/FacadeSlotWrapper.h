@@ -6,7 +6,7 @@
 #define BETBOOMTESTTASK_FACADESLOTWRAPPER_H
 
 #include "QObject"
-#include "IFacade.h"
+#include "Logic/IFacade.h"
 
 class FacadeSlotWrapper: public QObject{
 Q_OBJECT

@@ -1,12 +1,12 @@
 #include <QApplication>
 #include "Qt/MainWidget.h"
-#include "Logic/ImageCursorController.h"
+#include "Qt/ImageCursorController.h"
 #include "Logic/LabelImageLoader.h"
 #include "Logic/OpenCV/OpenCVWrapper.h"
 #include "Logic/OpenCV/MatHandler.h"
 #include "Logic/OpenCV/PathSearcher.h"
 #include "Logic/Facade.h"
-#include "Logic/FacadeSlotWrapper.h"
+#include "Qt/FacadeSlotWrapper.h"
 
 int main(int argc, char *argv[]) {
     cv::Vec3b backgroundColor(255, 255, 255);
