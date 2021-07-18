@@ -2,13 +2,13 @@
 // Created by denis on 18.07.2021.
 //
 
-#include "Facade.h"
+#include "Logic/Facade.h"
 
 #include <utility>
 #include <Qt/WarningThrower.h>
-#include "Commands/CommandGetResultMM.h"
-#include "Commands/CommandGetResultPix.h"
-#include "Exception.h"
+#include "Logic/Commands/CommandGetResultMM.h"
+#include "Logic/Commands/CommandGetResultPix.h"
+#include "Logic/Exception.h"
 
 void Facade::setStartDot() {
 
