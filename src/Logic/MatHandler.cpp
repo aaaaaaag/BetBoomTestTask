@@ -35,32 +35,28 @@ void MatHandler::SetEndDot(QPoint dot) {
 }
 
 int MatHandler::GetResultPix() {
-    if (!m_isStartSet)
-        throw GetResultWithoutInitDotsException("start point not set");
-    if (!m_isEndSet)
-        throw GetResultWithoutInitDotsException("end point not set");
-
-    m_pWrapper->createMatCopy();
-    auto res = m_pPathSearcher->GetNearestPath(m_startDot, m_endDot);
-    m_pWrapper->setMatCopy();
+    checkIsDotsSet();
     m_isStartSet = false;
     m_isEndSet = false;
+
+    auto res = m_pPathSearcher->GetNearestPath(m_startDot, m_endDot);
     return res / 2;
 }
 
 double MatHandler::GetResultMM() {
+    checkIsDotsSet();
+    m_isStartSet = false;
+    m_isEndSet = false;
+    auto res = m_pPathSearcher->GetNearestPath(m_startDot, m_endDot) / 200;
+
+    double resD = res;
+    resD *= 12.8;
+    return resD;
+}
+
+void MatHandler::checkIsDotsSet() const {
     if (!m_isStartSet)
         throw GetResultWithoutInitDotsException("start point not set");
     if (!m_isEndSet)
         throw GetResultWithoutInitDotsException("end point not set");
-
-    m_pWrapper->createMatCopy();
-    auto res = m_pPathSearcher->GetNearestPath(m_startDot, m_endDot);
-    m_pWrapper->setMatCopy();
-    m_isStartSet = false;
-    m_isEndSet = false;
-    res /= 200;
-    double resD = res;
-    resD *= 12,8;
-    return resD;
 }

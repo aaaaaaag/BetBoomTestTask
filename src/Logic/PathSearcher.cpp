@@ -7,9 +7,10 @@
 #include "Logic/Exception.h"
 #include "cmath"
 
-PathSearcher::PathSearcher(std::shared_ptr<IOpenCVWrapper> wrapper): m_wrapper(std::move(wrapper)) {
-    m_highColor = {0, 0, 0};
-    m_lowColor = {50, 50, 50};
+PathSearcher::PathSearcher(std::shared_ptr<IOpenCVWrapper> wrapper, const cv::Vec3b& backgroundColor):
+m_wrapper(std::move(wrapper)),
+m_backgroundColor(backgroundColor)
+{
 }
 
 void PathSearcher::updateWrapper(std::shared_ptr<IOpenCVWrapper> wrapper) {
@@ -19,9 +20,14 @@ void PathSearcher::updateWrapper(std::shared_ptr<IOpenCVWrapper> wrapper) {
 int PathSearcher::GetNearestPath(QPoint start, QPoint end) {
     std::vector<QPoint> v_path;
     v_path.push_back(start);
+
+    m_wrapper->createMatCopy();
     GetPathRec(start, end, v_path);
+    m_wrapper->setMatCopy();
+
     if (m_vPaths.empty())
         throw FailFindRoadException("Road not found");
+
     size_t minLen = m_vPaths[0].size();
     for (const auto& path: m_vPaths)
     {
@@ -41,80 +47,42 @@ std::vector<QPoint> PathSearcher::getNearDots(QPoint dot) {
     return vPoints;
 }
 
-bool isWhite(const cv::Vec3b& color)
+bool PathSearcher::isWhite(const cv::Vec3b& color)
 {
-    cv::Vec3b searchColor = {255, 255, 255};
-
     uint blue = color.val[0];
     uint green = color.val[1];
     uint red = color.val[2];
 
-    if (blue == searchColor.val[0] &&
-        green == searchColor.val[1] &&
-        red == searchColor.val[2])
+    if (blue == m_backgroundColor.val[0] &&
+        green == m_backgroundColor.val[1] &&
+        red == m_backgroundColor.val[2])
         return true;
     return false;
 
 }
-
-bool isRed(const cv::Vec3b& color)
-{
-    cv::Vec3b searchColor = {0, 0, 255};
-
-    uint blue = color.val[0];
-    uint green = color.val[1];
-    uint red = color.val[2];
-
-    if (searchColor.val[0] <= blue && blue <= searchColor.val[0] + 30 &&
-            searchColor.val[1] <= green && green <= searchColor.val[1] + 30 &&
-            searchColor.val[2] - 30 <= red && red <= searchColor.val[2])
-        return true;
-    return false;
-
-}
-
-
 
 void PathSearcher::GetPathRec(QPoint start, QPoint end, std::vector<QPoint> curPath) {
-    if (m_vPaths.size() > 100)
+    if (m_vPaths.size() > 1000)
         return;
-    auto nearDots = getNearDots(start);
-    for (auto dot: nearDots)
+    for (auto dot: getNearDots(start))
     {
         if (std::find(curPath.begin(), curPath.end(), dot) != curPath.end())
             continue;
         if (isWhite(m_wrapper->getMatPix(dot.x(), dot.y())))
             continue;
-        m_wrapper->setMatPix(dot.x(), dot.y(), cv::Vec3b(255, 255, 255));
-//        if (!isColorNeed(m_wrapper->getMatPix(dot.x(), dot.y()))) {
-//            if (!isColorNeed(m_wrapper->getMatPix(dot.x(), dot.y()))))
-//            continue;
-//        }
-        std::cout << "Cur dot = (" << start.x() << ", " << start.y() << ")\n";
-        std::cout << "End dot = (" << end.x() << ", " << end.y() << ")\n";
+        m_wrapper->setMatPix(dot.x(), dot.y(), m_backgroundColor);
+
         auto copyPath = curPath;
         copyPath.push_back(dot);
-        if (dot == end) {
+        if (dot == end)
             m_vPaths.push_back(curPath);
-            std::cout << "ADDED!!! cur size = " << m_vPaths.size() << std::endl;
-        }
         else
             GetPathRec(dot, end, copyPath);
     }
 }
 
-bool PathSearcher::isColorNeed(const cv::Vec3b& color) {
-    uint blue = color.val[0];
-    uint green = color.val[1];
-    uint red = color.val[2];
-    if (abs(static_cast<int>(blue - green)) > 30 ||
-            abs(static_cast<int>(blue - red)) > 30 ||
-            abs(static_cast<int>(red - green)) > 30)
-        return false;
 
-    if (m_highColor.val[0] <= blue && blue <= m_lowColor.val[0] &&
-            m_highColor.val[1] <= green && green <= m_lowColor.val[1] &&
-            m_highColor.val[2] <= red && red <= m_lowColor.val[2])
-        return true;
-    return false;
-}
+
+
+
+

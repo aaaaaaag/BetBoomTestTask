@@ -24,6 +24,8 @@ public:
 
 private:
 
+    void checkIsDotsSet() const;
+
     QPoint m_startDot;
     QPoint m_endDot;
     bool m_isStartSet = false;

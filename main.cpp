@@ -10,6 +10,7 @@
 #include "Logic/FacadeSlotWrapper.h"
 
 int main(int argc, char *argv[]) {
+    cv::Vec3b backgroundColor(255, 255, 255);
     QApplication a(argc, argv);
 
     auto pathToImage = argv[1];
@@ -21,10 +22,9 @@ int main(int argc, char *argv[]) {
     auto openCvWrapper = std::make_shared<OpenCVWrapper>();
     openCvWrapper->loadImage(pathToImage);
 
-    auto pathSearcher = std::make_shared<PathSearcher>(openCvWrapper);
+    auto pathSearcher = std::make_shared<PathSearcher>(openCvWrapper, backgroundColor);
 
     auto matHandler = std::make_shared<MatHandler>(openCvWrapper, pathSearcher);
-    auto connector = new ConnectMediator;
 
     auto cursorController = new ImageCursorController(matHandler, label->getOrigImageSize());
     cursorController->setPixmap(*label->pixmap());
