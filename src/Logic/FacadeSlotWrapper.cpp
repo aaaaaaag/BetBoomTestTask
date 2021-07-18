@@ -2,7 +2,7 @@
 // Created by denis on 18.07.2021.
 //
 
-#include "FacadeSlotWrapper.h"
+#include "Logic/FacadeSlotWrapper.h"
 
 #include <utility>
 

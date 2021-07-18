@@ -8,21 +8,25 @@
 #include <Qt/WarningThrower.h>
 #include "Logic/Commands/CommandGetResultMM.h"
 #include "Logic/Commands/CommandGetResultPix.h"
+#include "Logic/Commands/CommandSetEndPoint.h"
+#include "Logic/Commands/CommandSetStartPoint.h"
 #include "Logic/Exception.h"
 
 Facade::Facade(std::shared_ptr<IMatHandler> matHandler, IImageCursorController* cursorController, QLabel *label):
         m_pMatHandler(std::move(matHandler)),
         m_pResLabel(label),
-        m_pCursorController(std::move(cursorController))
+        m_pCursorController(cursorController)
 {
 }
 
 void Facade::setStartDot() {
-    m_pCursorController->setState(mouseDoState::setStartDot);
+    auto command = std::make_shared<CommandSetStartPoint>(m_pCursorController);
+    command->execute();
 }
 
 void Facade::setEndDot() {
-    m_pCursorController->setState(mouseDoState::setEndDot);
+    auto command = std::make_shared<CommandSetEndPoint>(m_pCursorController);
+    command->execute();
 }
 
 void Facade::getResultPix() {
