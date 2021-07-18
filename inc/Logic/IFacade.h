@@ -6,6 +6,7 @@
 #define BETBOOMTESTTASK_IFACADE_H
 
 #include "memory"
+#include "QLabel"
 
 class IFacade
 {
@@ -17,6 +18,7 @@ public:
     virtual void setEndDot() = 0;
     virtual void getResultPix() = 0;
     virtual void getResultMM() = 0;
+    virtual void setLabel(QLabel* label) = 0;//TODO i dont know how ignore this
 
 };
 

@@ -8,9 +8,10 @@
 #include "Qt/MainWindow.h"
 #include <qt5/QtWidgets/QMainWindow>
 #include "string"
-#include "Qt/IConnectMediator.h"
 #include "memory"
-#include "Logic/IMatHandler.h"
+#include "Logic/FacadeSlotWrapper.h"
+#include "QLabel"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
     class MainWindow;
@@ -23,15 +24,13 @@ class MainWidget: public  QMainWindow {
 
 public:
 
-    explicit MainWidget(QLabel* label, IConnectMediator* mediator, std::shared_ptr<IMatHandler> matHandler, QWidget *parent = nullptr);
+    explicit MainWidget(QLabel* label, std::shared_ptr<FacadeSlotWrapper> facade);
     ~MainWidget() override;
 
-protected slots:
-    void getResPix();
-    void getResMM();
-
 private:
-    std::shared_ptr<IMatHandler> m_pMatHandler;
+
+    void connectActionsToUi();
+    std::shared_ptr<FacadeSlotWrapper> m_pFacade;
     Ui::MainWindow* ui;
 
 

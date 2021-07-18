@@ -13,7 +13,7 @@
 class Facade: public IFacade{
 public:
 
-    Facade(std::shared_ptr<IMatHandler> matHandler, std::shared_ptr<IImageCursorController> cursorController, QLabel *label);
+    Facade(std::shared_ptr<IMatHandler> matHandler, IImageCursorController* cursorController, QLabel *label);
 
     void setStartDot() override;
 
@@ -23,8 +23,10 @@ public:
 
     void getResultMM() override;
 
+    void setLabel(QLabel *label) override;
+
 private:
-    std::shared_ptr<IImageCursorController> m_pCursorController;
+    IImageCursorController* m_pCursorController;
     std::shared_ptr<IMatHandler> m_pMatHandler;
     QLabel* m_pResLabel;
 

@@ -26,3 +26,7 @@ void FacadeSlotWrapper::getResultPix() {
 void FacadeSlotWrapper::getResultMM() {
     m_pFacade->getResultMM();
 }
+
+void FacadeSlotWrapper::setLabel(QLabel *label) {
+    m_pFacade->setLabel(label);
+}

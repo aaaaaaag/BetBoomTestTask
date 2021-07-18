@@ -8,10 +8,13 @@
 #include "QObject"
 #include "IFacade.h"
 
-class FacadeSlotWrapper {
+class FacadeSlotWrapper: public QObject{
 Q_OBJECT
+
 public:
     explicit FacadeSlotWrapper(std::shared_ptr<IFacade> facade);
+
+    void setLabel(QLabel* label);
 
 public slots:
 

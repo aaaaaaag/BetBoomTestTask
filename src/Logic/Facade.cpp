@@ -10,7 +10,7 @@
 #include "Logic/Commands/CommandGetResultPix.h"
 #include "Logic/Exception.h"
 
-Facade::Facade(std::shared_ptr<IMatHandler> matHandler, std::shared_ptr<IImageCursorController> cursorController, QLabel *label):
+Facade::Facade(std::shared_ptr<IMatHandler> matHandler, IImageCursorController* cursorController, QLabel *label):
         m_pMatHandler(std::move(matHandler)),
         m_pResLabel(label),
         m_pCursorController(std::move(cursorController))
@@ -51,6 +51,10 @@ void Facade::getResultMM() {
     {
         WarningThrower::ShowWarning(&ex);
     }
+}
+
+void Facade::setLabel(QLabel *label) {
+    m_pResLabel = label;
 }
 
 

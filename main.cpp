@@ -6,6 +6,9 @@
 #include "Logic/OpenCVWrapper.h"
 #include "Logic/MatHandler.h"
 #include "Logic/PathSearcher.h"
+#include "Logic/Facade.h"
+#include "Logic/FacadeSlotWrapper.h"
+
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
@@ -14,7 +17,7 @@ int main(int argc, char *argv[]) {
     auto labelLoader = std::make_shared<LabelImageLoader>();
     auto label = labelLoader->loadImageToLabel(pathToImage);
     label->reformSize(QSize(960, 540));
-    //label->show();
+
     auto openCvWrapper = std::make_shared<OpenCVWrapper>();
     openCvWrapper->loadImage(pathToImage);
 
@@ -27,12 +30,12 @@ int main(int argc, char *argv[]) {
     cursorController->setPixmap(*label->pixmap());
 
 
-    cursorController->reformSize(QSize(960, 540));
-    std::cout << "Before label: (" << cursorController->width() << ", " << cursorController->height() << ")\n";
+    cursorController->reformSize(label->size());
 
+    auto facade = std::make_shared<Facade>(matHandler, cursorController, nullptr);
+    auto facadeWrapper = std::make_shared<FacadeSlotWrapper>(facade);
 
-
-    MainWidget widget(cursorController, connector, matHandler);
+    MainWidget widget(cursorController, facadeWrapper);
     widget.show();
 
     return QApplication::exec();
