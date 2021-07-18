@@ -7,7 +7,7 @@
 bool DotChecker::IsDotCorrect(const std::shared_ptr<IOpenCVWrapper>& wrapper, QPoint point, int rad) {
     auto x = point.x();
     auto y = point.y();
-    cv::Vec3b searchColor = {255, 0, 0};
+    cv::Vec3b searchColor = {0, 0, 255};
     bool isFind = false;
     for (int r = 0; r < rad && !isFind; r++)
     {
