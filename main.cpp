@@ -1,5 +1,4 @@
 #include <QApplication>
-#include <Qt/ConnectMediator.h>
 #include "Qt/MainWidget.h"
 #include "Logic/ImageCursorController.h"
 #include "Logic/LabelImageLoader.h"

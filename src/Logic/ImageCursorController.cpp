@@ -23,7 +23,6 @@ QPoint ImageCursorController::getMousePos(QMouseEvent *event) {
 
 void ImageCursorController::mousePressEvent(QMouseEvent *ev) {
     auto pos = getMousePos(ev);
-    std::cout << "click coord: (" << pos.x() << ", " << pos.y() << ")\n";
     try {
         switch (m_state) {
             case mouseDoState::setStartDot:

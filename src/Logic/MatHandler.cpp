@@ -21,7 +21,6 @@ void MatHandler::SetStartDot(QPoint dot) {
     }
     m_isStartSet = true;
     m_startDot = dot;
-    std::cout << "Start dot setted!!!   " << m_startDot.x() << ' ' << m_startDot.y() << std::endl;
 }
 
 void MatHandler::SetEndDot(QPoint dot) {
@@ -31,7 +30,6 @@ void MatHandler::SetEndDot(QPoint dot) {
     }
     m_isEndSet = true;
     m_endDot = dot;
-    std::cout << "End dot setted!!!   " << m_endDot.x() << ' ' << m_endDot.y() << std::endl;
 }
 
 int MatHandler::GetResultPix() {
@@ -39,17 +37,15 @@ int MatHandler::GetResultPix() {
     m_isStartSet = false;
     m_isEndSet = false;
 
-    auto res = m_pPathSearcher->GetNearestPath(m_startDot, m_endDot);
+    auto start = DotChecker::GetStartRoadDot(m_pWrapper, m_startDot, SEARCH_RAD);
+    auto end = DotChecker::GetStartRoadDot(m_pWrapper, m_endDot, SEARCH_RAD);
+
+    auto res = m_pPathSearcher->GetNearestPath(start, end);
     return res / 2;
 }
 
 double MatHandler::GetResultMM() {
-    checkIsDotsSet();
-    m_isStartSet = false;
-    m_isEndSet = false;
-    auto res = m_pPathSearcher->GetNearestPath(m_startDot, m_endDot) / 200;
-
-    double resD = res;
+    double resD = static_cast<int>(GetResultPix() / 200);
     resD *= 12.8;
     return resD;
 }
