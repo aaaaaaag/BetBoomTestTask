@@ -2,7 +2,7 @@
 // Created by denis on 17.07.2021.
 //
 
-#include "WarningThrower.h"
+#include "Qt/WarningThrower.h"
 #include "QMessageBox"
 
 void WarningThrower::ShowWarning(Exception *ex) {

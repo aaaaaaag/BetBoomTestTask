@@ -20,3 +20,11 @@ cv::Mat OpenCVWrapper::getMat() {
     return m_imageMatrix;
 }
 
+void OpenCVWrapper::createMatCopy() {
+    m_imageMatrixCopy = m_imageMatrix.clone();
+}
+
+void OpenCVWrapper::setMatCopy() {
+    m_imageMatrix = m_imageMatrixCopy;
+}
+

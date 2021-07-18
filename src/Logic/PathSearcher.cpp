@@ -34,8 +34,8 @@ int PathSearcher::GetNearestPath(QPoint start, QPoint end) {
 
 std::vector<QPoint> PathSearcher::getNearDots(QPoint dot) {
     std::vector<QPoint> vPoints;
-    vPoints.emplace_back(dot.x() + 1, dot.y());
     vPoints.emplace_back(dot.x() - 1, dot.y());
+    vPoints.emplace_back(dot.x() + 1, dot.y());
     vPoints.emplace_back(dot.x(), dot.y() - 1);
     vPoints.emplace_back(dot.x(), dot.y() + 1);
     return vPoints;

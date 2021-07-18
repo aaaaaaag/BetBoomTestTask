@@ -39,15 +39,25 @@ int MatHandler::GetResultPix() {
         throw GetResultWithoutInitDotsException("start point not set");
     if (!m_isEndSet)
         throw GetResultWithoutInitDotsException("end point not set");
-    auto start = DotChecker::GetStartRoadDot(m_pWrapper, m_startDot, SEARCH_RAD);
-    auto end = DotChecker::GetStartRoadDot(m_pWrapper, m_endDot, SEARCH_RAD);
-    std::cout << "END: (" << end.x() << ", " << end.y() << ")\n";
-    auto res = m_pPathSearcher->GetNearestPath(start, end);
+
+    m_pWrapper->createMatCopy();
+    auto res = m_pPathSearcher->GetNearestPath(m_startDot, m_endDot);
+    m_pWrapper->setMatCopy();
     m_isStartSet = false;
     m_isEndSet = false;
-    return res;
+    return res / 2;
 }
 
 int MatHandler::GetResultMM() {
+    if (!m_isStartSet)
+        throw GetResultWithoutInitDotsException("start point not set");
+    if (!m_isEndSet)
+        throw GetResultWithoutInitDotsException("end point not set");
 
+    m_pWrapper->createMatCopy();
+    auto res = m_pPathSearcher->GetNearestPath(m_startDot, m_endDot);
+    m_pWrapper->setMatCopy();
+    m_isStartSet = false;
+    m_isEndSet = false;
+    return res / 200 * 12,8;
 }

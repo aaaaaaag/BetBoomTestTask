@@ -18,8 +18,12 @@ public:
 
     cv::Mat getMat() override;
 
-private:
+    void createMatCopy() override;
 
+    void setMatCopy() override;
+
+private:
+    cv::Mat m_imageMatrixCopy;
     cv::Mat m_imageMatrix;
 
 };
