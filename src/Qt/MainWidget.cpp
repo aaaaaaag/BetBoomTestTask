@@ -7,6 +7,10 @@
 #include "Qt/ConnectMediator.h"
 #include "Logic/Exception.h"
 #include "Qt/WarningThrower.h"
+#include "Logic/Commands/CommandGetResultPix.h"
+#include "Logic/Commands/CommandGetResultMM.h"
+
+
 MainWidget::MainWidget(QLabel* label, IConnectMediator* mediator, std::shared_ptr<IMatHandler> matHandler, QWidget *parent): QMainWindow(parent),
                                                               ui(new Ui::MainWindow),
                                                               m_pMatHandler(std::move(matHandler)){
@@ -30,10 +34,11 @@ MainWidget::~MainWidget() {
 
 void MainWidget::getResPix() {
     try {
-        auto res = m_pMatHandler->GetResultPix();
-        QString resStr;
-        resStr.append(std::to_string(res).data());
-        ui->result->setText(resStr);
+        int res;
+        auto command = std::make_shared<CommandGetResultPix>(m_pMatHandler, res);
+        command->execute();
+
+        ui->result->setText(std::to_string(res).data());
     }
     catch (Exception &ex)
     {
@@ -43,10 +48,11 @@ void MainWidget::getResPix() {
 
 void MainWidget::getResMM() {
     try {
-        auto res = m_pMatHandler->GetResultMM();
-        QString resStr;
-        resStr.append(std::to_string(res).data());
-        ui->result->setText(resStr);
+        double res;
+        auto command = std::make_shared<CommandGetResultMM>(m_pMatHandler, res);
+        command->execute();
+
+        ui->result->setText(std::to_string(res).data());
     }
     catch (Exception &ex)
     {
