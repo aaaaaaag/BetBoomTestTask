@@ -36,10 +36,44 @@ std::vector<QPoint> PathSearcher::getNearDots(QPoint dot) {
     std::vector<QPoint> vPoints;
     vPoints.emplace_back(dot.x() + 1, dot.y());
     vPoints.emplace_back(dot.x() - 1, dot.y());
-    vPoints.emplace_back(dot.x(), dot.y() + 1);
     vPoints.emplace_back(dot.x(), dot.y() - 1);
+    vPoints.emplace_back(dot.x(), dot.y() + 1);
     return vPoints;
 }
+
+bool isWhite(const cv::Vec3b& color)
+{
+    cv::Vec3b searchColor = {255, 255, 255};
+
+    uint blue = color.val[0];
+    uint green = color.val[1];
+    uint red = color.val[2];
+
+    if (blue == searchColor.val[0] &&
+        green == searchColor.val[1] &&
+        red == searchColor.val[2])
+        return true;
+    return false;
+
+}
+
+bool isRed(const cv::Vec3b& color)
+{
+    cv::Vec3b searchColor = {0, 0, 255};
+
+    uint blue = color.val[0];
+    uint green = color.val[1];
+    uint red = color.val[2];
+
+    if (searchColor.val[0] <= blue && blue <= searchColor.val[0] + 30 &&
+            searchColor.val[1] <= green && green <= searchColor.val[1] + 30 &&
+            searchColor.val[2] - 30 <= red && red <= searchColor.val[2])
+        return true;
+    return false;
+
+}
+
+
 
 void PathSearcher::GetPathRec(QPoint start, QPoint end, std::vector<QPoint> curPath) {
     if (m_vPaths.size() > 100)
@@ -49,10 +83,12 @@ void PathSearcher::GetPathRec(QPoint start, QPoint end, std::vector<QPoint> curP
     {
         if (std::find(curPath.begin(), curPath.end(), dot) != curPath.end())
             continue;
-        if (!isColorNeed(m_wrapper->getMatPix(dot.x(), dot.y())))
+        if (isWhite(m_wrapper->getMatPix(dot.x(), dot.y())))
             continue;
+        m_wrapper->setMatPix(dot.x(), dot.y(), cv::Vec3b(255, 255, 255));
 //        if (!isColorNeed(m_wrapper->getMatPix(dot.x(), dot.y()))) {
-//
+//            if (!isColorNeed(m_wrapper->getMatPix(dot.x(), dot.y()))))
+//            continue;
 //        }
         std::cout << "Cur dot = (" << start.x() << ", " << start.y() << ")\n";
         std::cout << "End dot = (" << end.x() << ", " << end.y() << ")\n";
